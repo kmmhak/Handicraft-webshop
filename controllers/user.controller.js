@@ -1,6 +1,21 @@
 import { genJwt, genSaltHash, validPassword } from "../lib/utils.js";
 import pool from "../db/dbConfig.js";
 
+export const getById = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const user = await pool.query("SELECT * FROM users WHERE id=$1", [id]);
+
+    if (user.rows.length > 0) {
+      res.status(200).json({ user: user.rows });
+    } else {
+      res.status(404).json({ message: "No user with given id" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "error getting user" });
+  }
+};
+
 export const getAll = async (req, res) => {
   try {
     const users = await pool.query("SELECT * FROM users");
@@ -15,7 +30,7 @@ export const register = async (req, res) => {
     const { name, email, password, password2 } = req.body;
     const errorList = [];
 
-    const user = await pool.query("Select * from users where email=$1", [
+    const user = await pool.query("SELECT * FROM users WHERE email=$1", [
       email,
     ]);
 
