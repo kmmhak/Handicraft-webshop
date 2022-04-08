@@ -11,5 +11,6 @@ passport.use(jwtStrategy);
 
 listingRouter.get("/", controller.getAll);
 listingRouter.get("/:id", controller.getById);
+listingRouter.post("/", controller.addListing);
 
 export default listingRouter;
