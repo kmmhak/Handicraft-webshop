@@ -6,7 +6,7 @@ name VARCHAR(200) NOT NULL,
 email VARCHAR(200) UNIQUE NOT NULL,
 salt VARCHAR NOT NULL,
 hash VARCHAR NOT NULL,
-role roleEnum DEFAULT 'regular',
+role roleEnum DEFAULT 'regular'
 );
 
 
@@ -22,7 +22,7 @@ name VARCHAR(50) NOT NULL
 
 CREATE TYPE unitEnum AS enum ('kpl', 'cm');
 
-CREATE TABLE products(
+CREATE TABLE listings(
 id BIGSERIAL PRIMARY KEY NOT NULL,
 name VARCHAR(50) NOT NULL,
 brand VARCHAR(50),
@@ -54,12 +54,12 @@ CONSTRAINT fk_users_id
 
 CREATE TABLE bids (
 id BIGSERIAL PRIMARY KEY NOT NULL,
-fk_products_id INT,
+fk_listings_id INT,
 fk_users_id INT,
 bid_time TIMESTAMPTZ,
-CONSTRAINT fk_products_id
-	FOREIGN KEY(fk_products_id)
-		REFERENCES products(id)
+CONSTRAINT fk_listings_id
+	FOREIGN KEY(fk_listings_id)
+		REFERENCES listings(id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 CONSTRAINT fk_users_id
@@ -73,13 +73,13 @@ CREATE TABLE messages (
 id BIGSERIAL PRIMARY KEY NOT NULL,
 subject VARCHAR(100) NOT NULL,
 message VARCHAR(500) NOT NULL,
-fk_products_id INT NOT NULL,
+fk_listings_id INT NOT NULL,
 fk_sender_id INT NOT NULL,
 fk_recipient_id INT NOT NULL,
 created TIMESTAMPTZ,
-CONSTRAINT fk_products_id
-	FOREIGN KEY(fk_products_id)
-		REFERENCES products(id)
+CONSTRAINT fk_listings_id
+	FOREIGN KEY(fk_listings_id)
+		REFERENCES listings(id)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
 CONSTRAINT fk_sender_id
