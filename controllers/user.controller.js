@@ -3,7 +3,6 @@ import pool from "../db/dbConfig.js";
 
 export const getAll = async (req, res) => {
   try {
-    console.log(req.user.id);
     const users = await pool.query("SELECT * FROM users");
     res.status(200).json({ users: users.rows });
   } catch (error) {
@@ -13,14 +12,26 @@ export const getAll = async (req, res) => {
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, password2 } = req.body;
+    const errorList = [];
 
     const user = await pool.query("Select * from users where email=$1", [
       email,
     ]);
 
     if (user.rows.length > 0) {
-      res.status(400).json({ message: "Email already in use" });
+      errorList.push("Email already in use");
+    }
+
+    if (password !== password2) {
+      errorList.push("Passwords do not match");
+    }
+
+    if (password.length < 6) {
+      errorList.push("Password must be atleast 6 characters long");
+    }
+    if (errorList.length > 0) {
+      res.status(400).json({ errorList });
     } else {
       const { salt, hash } = genSaltHash(password);
 
@@ -53,7 +64,6 @@ export const login = async (req, res) => {
 
       if (validPassword(password, hash, salt)) {
         const { token } = genJwt(user);
-        const loggedInUser = user.rows;
         res.status(200).json({ user: user.rows, token });
       }
     }
@@ -61,10 +71,3 @@ export const login = async (req, res) => {
     res.status(400).json({ message: "Error logging in" });
   }
 };
-/*
-export const authenticate = async (req, res) => {
-  await handleResponse(req, res, User.authenticate, [req.user]);
-
-export const authenticate = async (user) => result({ user }, 200);
-
-}; */
