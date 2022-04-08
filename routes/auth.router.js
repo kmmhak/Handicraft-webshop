@@ -12,6 +12,5 @@ passport.use(jwtStrategy);
 authRouter.post("/login", controller.login);
 authRouter.post("/register", controller.register);
 authRouter.get("/users", passportJwt(), controller.getAll);
-//authRouter.get("/authenticate", passportJwt(), controller.authenticate);
 
 export default authRouter;
