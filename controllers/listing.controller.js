@@ -133,3 +133,33 @@ export const addListing = async (req, res) => {
     res.status(400).json({ message: "Error adding a new listing" });
   }
 };
+
+export const deleteById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const userId = req.user.id;
+
+    if (isNaN(id)) {
+      res.status(400).json({ message: "id needs to be a number" });
+    } else {
+      const foundListing = await pool.query(
+        `SELECT * FROM listings where id = $1`,
+        [id]
+      );
+
+      if (foundListing.rows.length == 0) {
+        res.status(404).json({ message: "Listing not found" });
+      } else if (foundListing.rows[0].fk_users_id != userId) {
+        res
+          .status(403)
+          .json({ message: "You can only delete your own listings" });
+      } else {
+        await pool.query(`DELETE FROM listings WHERE id = $1`, [id]);
+
+        res.status(200).json({ message: "listing deleted" });
+      }
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};

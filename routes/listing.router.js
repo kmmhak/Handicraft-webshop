@@ -13,5 +13,6 @@ listingRouter.get("/", controller.getAll);
 listingRouter.get("/:id", controller.getById);
 listingRouter.post("/", controller.addListing);
 listingRouter.get("/user/:id", controller.getByUserId);
+listingRouter.delete("/:id", passportJwt(), controller.deleteById);
 
 export default listingRouter;
