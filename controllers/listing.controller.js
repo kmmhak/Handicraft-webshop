@@ -26,9 +26,39 @@ export const getById = async (req, res) => {
   }
 };
 
+export const getByUserId = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    if (isNaN(id)) {
+      res.status(400).json({ message: "id needs to be a number" });
+    } else {
+      const foundUser = await pool.query(`SELECT * FROM users where id= $1`, [
+        id,
+      ]);
+
+      if (foundUser.rows.length == 0) {
+        res.status(404).json({ message: "User not found" });
+      } else {
+        const userListings = await pool.query(
+          `SELECT * FROM listings WHERE fk_users_id = $1`,
+          [id]
+        );
+
+        if (userListings.rows.length > 0) {
+          res.status(200).json({ userListings: userListings.rows });
+        } else {
+          res.status(404).json({ message: "User has no listings" });
+        }
+      }
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error getting listings" });
+  }
+};
+
 export const addListing = async (req, res) => {
   try {
-    const errorList = [];
     const {
       name,
       brand,
