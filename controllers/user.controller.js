@@ -25,6 +25,33 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const changePassword = async (req, res) => {
+  try {
+    const { newPassword, newPassword2, oldPassword } = req.body;
+    const userId = req.user.id;
+
+    const user = await pool.query(`SELECT * FROM users WHERE id = $1`, [
+      userId,
+    ]);
+
+    if (!newPassword || !newPassword2 || !oldPassword) {
+      res.status(400).json({ message: "Please insert all fields" });
+    } else if (newPassword !== newPassword2) {
+      res.status(400).json({ message: "New passwords do not match" });
+    } else if (
+      validPassword(oldPassword, user.rows[0].hash, user.rows[0].salt)
+    ) {
+      const { hash, salt } = genSaltHash(newPassword);
+      await pool.query(`UPDATE users SET hash = $1, salt = $2`, [hash, salt]);
+      res.status(200).json({ message: "Password changed" });
+    } else {
+      res.status(400).json({ message: "invalid password" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 export const register = async (req, res) => {
   try {
     const { name, email, password, password2 } = req.body;

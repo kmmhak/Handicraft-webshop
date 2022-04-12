@@ -11,5 +11,6 @@ passport.use(jwtStrategy);
 
 userRouter.get("/", passportJwt(), controller.getAll);
 userRouter.get("/:id", passportJwt(), controller.getById);
+userRouter.post("/change", passportJwt(), controller.changePassword);
 
 export default userRouter;
