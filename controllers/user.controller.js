@@ -90,6 +90,10 @@ export const register = async (req, res) => {
       errorList.push("Email already in use");
     }
 
+    if (!validateEmail(email)) {
+      errorList.push("Invalid email");
+    }
+
     if (password !== password2) {
       errorList.push("Passwords do not match");
     }
