@@ -1,4 +1,9 @@
-import { genJwt, genSaltHash, validPassword } from "../lib/utils.js";
+import {
+  genJwt,
+  genSaltHash,
+  validPassword,
+  validateEmail,
+} from "../lib/utils.js";
 import pool from "../db/dbConfig.js";
 
 export const getById = async (req, res) => {
@@ -49,6 +54,26 @@ export const changePassword = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const updateInfo = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const userId = req.user.id;
+
+    if (validateEmail(email)) {
+      await pool.query(`UPDATE users SET name = $1, email = $2 WHERE id = $3`, [
+        name,
+        email,
+        userId,
+      ]);
+      res.status(200).json({ message: "Information updated" });
+    } else {
+      res.status(400).json({ message: "unvalid email" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error updating information" });
   }
 };
 
