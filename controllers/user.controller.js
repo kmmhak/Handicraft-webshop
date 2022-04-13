@@ -3,6 +3,7 @@ import {
   genSaltHash,
   validPassword,
   validateEmail,
+  isAdmin,
 } from "../lib/utils.js";
 import pool from "../db/dbConfig.js";
 
@@ -74,6 +75,39 @@ export const updateInfo = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ message: "Error updating information" });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const id = req.params.id;
+
+    if (!isNaN(id)) {
+      const foundUser = await pool.query(`SELECT * FROM users WHERE id = $1`, [
+        id,
+      ]);
+
+      if (foundUser.rows.length == 0) {
+        res.status(404).json({ message: "User not found" });
+      } else if (userId === id) {
+        await pool.query(`DELETE FROM users WHERE id = $1`, [id]);
+        res.status(200).json({ message: "You have deleted your user account" });
+      } else {
+        const userRole = await pool.query(
+          `SELECT role FROM users WHERE id = $1`,
+          [userId]
+        );
+        if (isAdmin(userRole.rows[0].role)) {
+          await pool.query(`DELETE FROM users WHERE id = $1`, [id]);
+          res.status(200).json({ message: "User deleted" });
+        } else {
+          res.status(400).json({ message: "Could not delete user" });
+        }
+      }
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error deleting a user" });
   }
 };
 
