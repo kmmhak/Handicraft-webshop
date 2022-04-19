@@ -56,7 +56,7 @@ CREATE TABLE bids (
 id BIGSERIAL PRIMARY KEY NOT NULL,
 fk_listings_id INT,
 fk_users_id INT,
-bid_time TIMESTAMPTZ,
+bid_time TIMESTAMPTZ DEFAULT NOW(),
 CONSTRAINT fk_listings_id
 	FOREIGN KEY(fk_listings_id)
 		REFERENCES listings(id)
