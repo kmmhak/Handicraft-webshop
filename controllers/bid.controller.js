@@ -58,3 +58,16 @@ export const makeBid = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const bidHistory = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const foundBids = await pool.query(
+      `SELECT * FROM bids WHERE fk_users_id = $1 ORDER BY bid_time DESC`,
+      [userId]
+    );
+    res.status(200).json({ message: foundBids.rows });
+  } catch (error) {
+    res.status(400).json({ message: "Error getting bidding history" });
+  }
+};
