@@ -176,3 +176,39 @@ export const login = async (req, res) => {
     res.status(400).json({ message: "Error logging in" });
   }
 };
+
+export const changeRole = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const id = req.params.id;
+    const { role } = req.body;
+    console.log(role, userId, id);
+    const foundUser = await pool.query(`SELECT * FROM users WHERE id = $1`, [
+      id,
+    ]);
+
+    if (foundUser.rows.length > 0) {
+      const userRole = await pool.query(
+        `SELECT role FROM users WHERE id = $1`,
+        [userId]
+      );
+
+      if (
+        userRole.rows[0].role === "admin" ||
+        userRole.rows[0].role === "super"
+      ) {
+        const newRole = await pool.query(
+          `UPDATE users SET role = $1 WHERE id = $2`,
+          [role, id]
+        );
+        res.status(200).json({ message: `User role changed to ${role}` });
+      } else {
+        res.status(400).json({ message: "You do not have admin priviliges" });
+      }
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error changing role" });
+  }
+};

@@ -14,5 +14,6 @@ userRouter.get("/:id", passportJwt(), controller.getById);
 userRouter.post("/change", passportJwt(), controller.changePassword);
 userRouter.patch("/", passportJwt(), controller.updateInfo);
 userRouter.delete("/:id", passportJwt(), controller.deleteUser);
+userRouter.patch("/:id", passportJwt(), controller.changeRole);
 
 export default userRouter;
