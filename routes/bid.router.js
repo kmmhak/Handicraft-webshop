@@ -11,5 +11,6 @@ passport.use(jwtStrategy);
 
 bidRouter.get("/user/:id", controller.getById);
 bidRouter.post("/listing/:id", passportJwt(), controller.makeBid);
+bidRouter.get("/", passportJwt(), controller.bidHistory);
 
 export default bidRouter;
