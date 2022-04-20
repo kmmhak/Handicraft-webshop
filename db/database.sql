@@ -76,7 +76,7 @@ message VARCHAR(500) NOT NULL,
 fk_listings_id INT NOT NULL,
 fk_sender_id INT NOT NULL,
 fk_recipient_id INT NOT NULL,
-created TIMESTAMPTZ,
+created TIMESTAMPTZ DEFAULT NOW(),
 CONSTRAINT fk_listings_id
 	FOREIGN KEY(fk_listings_id)
 		REFERENCES listings(id)

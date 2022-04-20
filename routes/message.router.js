@@ -10,5 +10,6 @@ const messageRouter = Router();
 passport.use(jwtStrategy);
 
 messageRouter.get("/", passportJwt(), controller.usersMessages);
+messageRouter.post("/", passportJwt(), controller.sendMessages);
 
 export default messageRouter;
