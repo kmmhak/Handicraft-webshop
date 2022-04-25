@@ -163,3 +163,13 @@ export const deleteById = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const search = async (req, res) => {
+  try {
+    const foundListings = await pool.query(`SELECT * FROM listings`);
+
+    res.status(200).json({ message: foundListings.rows });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
