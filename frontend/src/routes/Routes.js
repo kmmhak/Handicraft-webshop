@@ -12,7 +12,7 @@ import Wool from "../components/Wool";
 import Cotton from "../components/Cotton";
 import BobbinPillow from "../components/BobbinPillow";
 import Bobbin from "../components/Bobbin";
-import Card from "../components/Card";
+import CardSupplies from "../components/CardSupplies";
 import Decor from "../components/Decor";
 
 const Router = () => {
@@ -31,7 +31,7 @@ const Router = () => {
       <Route path="/subcategories/puuvillalangat" element={<Cotton />} />
       <Route path="/subcategories/nyplaystyynyt" element={<BobbinPillow />} />
       <Route path="/subcategories/nypylat" element={<Bobbin />} />
-      <Route path="/subcategories/kortit" element={<Card />} />
+      <Route path="/subcategories/kortit" element={<CardSupplies />} />
       <Route path="/subcategories/koristeet" element={<Decor />} />
     </Routes>
   );
