@@ -14,6 +14,7 @@ import BobbinPillow from "../components/BobbinPillow";
 import Bobbin from "../components/Bobbin";
 import CardSupplies from "../components/CardSupplies";
 import Decor from "../components/Decor";
+import Listing from "../components/Listing";
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
       <Route path="/subcategories/nypylat" element={<Bobbin />} />
       <Route path="/subcategories/kortit" element={<CardSupplies />} />
       <Route path="/subcategories/koristeet" element={<Decor />} />
+      <Route path="/listings/:id" element={<Listing />} />
     </Routes>
   );
 };

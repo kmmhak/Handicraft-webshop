@@ -73,3 +73,12 @@ body {
   background: #800080;
   color: white;
 }
+
+.newest {
+  padding: 1rem;
+}
+
+.newest__title {
+  text-align: center;
+  padding: 1rem;
+}
