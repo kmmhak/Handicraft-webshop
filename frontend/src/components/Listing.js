@@ -1,19 +1,23 @@
-const Listing = ({ listing }) => {
+import { useParams } from "react-router-dom";
+import cardData from "./Data";
+
+const Listing = () => {
+  let { id } = useParams();
   return (
     <div>
-      <h1>{listing.title}</h1>
-      <img src={listing.img} alt={listing.title} />
-      <p>Brand: {listing.brand}</p>
+      <h1>{cardData[0].title}</h1>
+      <img src={cardData[0].img} alt={cardData[0].title} />
+      <p>Brand: {cardData[0].brand}</p>
       <p>
-        Qty {listing.length} {listing.unit}
+        Qty {cardData[0].length} {cardData[0].unit}
       </p>
-      <p>Color: {listing.color}</p>
-      <p>Seller: {listing.username}</p>
-      <p>Category: {listing.category}</p>
-      <p>Subcategory: {listing.subcategory}</p>
-      <p>Price {listing.price} €</p>
+      <p>Color: {cardData[0].color}</p>
+      <p>Seller: {cardData[0].username}</p>
+      <p>Category: {cardData[0].category}</p>
+      <p>Subcategory: {cardData[0].subcategory}</p>
+      <p>Price {cardData[0].price} €</p>
       <p>Description:</p>
-      <p>{listing.description}</p>
+      <p>{cardData[0].description}</p>
     </div>
   );
 };
