@@ -60,12 +60,11 @@ export const changePassword = async (req, res) => {
 
 export const updateInfo = async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { email } = req.body;
     const userId = req.user.id;
 
     if (validateEmail(email)) {
-      await pool.query(`UPDATE users SET name = $1, email = $2 WHERE id = $3`, [
-        name,
+      await pool.query(`UPDATE users SET  email = $1 WHERE id = $2`, [
         email,
         userId,
       ]);
@@ -113,7 +112,7 @@ export const deleteUser = async (req, res) => {
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, password2 } = req.body;
+    const { username, email, password, password2 } = req.body;
     const errorList = [];
 
     const user = await pool.query("SELECT * FROM users WHERE email=$1", [
@@ -141,10 +140,10 @@ export const register = async (req, res) => {
       const { salt, hash } = genSaltHash(password);
 
       pool.query(
-        `INSERT INTO users (email, name, salt, hash) VALUES ($1, $2, $3, $4)`,
-        [email, name, salt, hash]
+        `INSERT INTO users (email, username, salt, hash) VALUES ($1, $2, $3, $4)`,
+        [email, username, salt, hash]
       );
-      res.status(200).json({ message: `Thanks for registering, ${name}` });
+      res.status(200).json({ message: `Thanks for registering, ${username}` });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -154,7 +153,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  const errorMessage = "Wrong username or password";
+  const errorMessage = "Wrong email or password";
 
   try {
     const user = await pool.query(`SELECT * FROM users WHERE email = $1`, [

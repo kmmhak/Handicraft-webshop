@@ -59,8 +59,10 @@ export const getByUserId = async (req, res) => {
 
 export const addListing = async (req, res) => {
   try {
+    const userId = req.user.id;
+
     const {
-      name,
+      title,
       brand,
       photo,
       length,
@@ -70,23 +72,20 @@ export const addListing = async (req, res) => {
       price,
       category,
       subcategory,
-      user,
     } = req.body;
 
     if (
-      !name ||
+      !title ||
       !description ||
       !length ||
       !price ||
       !category ||
-      !subcategory ||
-      !user
+      !subcategory
     ) {
       res.status(400).json({ message: "Please give all required fields" });
     }
 
     if (
-      !Number.isInteger(user) ||
       !Number.isInteger(subcategory) ||
       !Number.isInteger(category) ||
       !Number.isInteger(length) ||
@@ -99,7 +98,7 @@ export const addListing = async (req, res) => {
     } else {
       const newListing = await pool.query(
         `INSERT INTO listings 
-      (name,
+      (title,
       brand,
       photo,
       length,
@@ -113,7 +112,7 @@ export const addListing = async (req, res) => {
       VALUES
       ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         [
-          name,
+          title,
           brand,
           photo,
           length,
@@ -123,14 +122,14 @@ export const addListing = async (req, res) => {
           price,
           category,
           subcategory,
-          user,
+          userId,
         ]
       );
 
       res.status(200).json({ message: "New listing added" });
     }
   } catch (error) {
-    res.status(400).json({ message: "Error adding a new listing" });
+    res.status(400).json({ message: "Error creating a new listing" });
   }
 };
 
