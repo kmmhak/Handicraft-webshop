@@ -64,7 +64,7 @@ export const addListing = async (req, res) => {
     const {
       title,
       brand,
-      photo,
+      img,
       length,
       unit,
       color,
@@ -100,7 +100,7 @@ export const addListing = async (req, res) => {
         `INSERT INTO listings 
       (title,
       brand,
-      photo,
+      img,
       length,
       unit,
       color,
@@ -114,7 +114,7 @@ export const addListing = async (req, res) => {
         [
           title,
           brand,
-          photo,
+          img,
           length,
           unit,
           color,

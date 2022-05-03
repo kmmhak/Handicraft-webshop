@@ -26,7 +26,7 @@ CREATE TABLE listings(
 id BIGSERIAL PRIMARY KEY NOT NULL,
 title VARCHAR(50) NOT NULL,
 brand VARCHAR(50),
-photo VARCHAR,
+img VARCHAR,
 length INT NOT NULL,
 unit unitEnum,
 color VARCHAR(30),
