@@ -9,6 +9,37 @@ export const getAll = async (req, res) => {
   }
 };
 
+export const getNewest = async (req, res) => {
+  try {
+    const newest = await pool.query(
+      `SELECT 
+      listings.id, 
+      title, 
+      brand, 
+      img, 
+      length, 
+      unit, 
+      color, 
+      description, 
+      price, 
+      categories.name AS category, 
+      subcategories.name AS subcategory, 
+      users.username, 
+      added 
+      FROM listings 
+      LEFT JOIN categories ON listings.fk_categories_id=categories.id
+      LEFT JOIN subcategories ON listings.fk_subcategories_id=subcategories.id
+      LEFT JOIN users ON listings.fk_users_id=users.id
+      ORDER BY added DESC 
+      LIMIT 5;`
+    );
+
+    res.status(200).json({ newest: newest.rows });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 export const getById = async (req, res) => {
   try {
     const id = Number(req.params.id);
