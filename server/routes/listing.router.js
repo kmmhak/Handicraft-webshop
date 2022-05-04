@@ -9,6 +9,7 @@ import {
 const listingRouter = Router();
 passport.use(jwtStrategy);
 
+listingRouter.get("/newest", controller.getNewest);
 listingRouter.get("/search", controller.search);
 listingRouter.get("/", controller.getAll);
 listingRouter.get("/:id", controller.getById);
