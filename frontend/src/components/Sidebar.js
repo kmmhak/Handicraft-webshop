@@ -5,34 +5,34 @@ const Sidebar = () => {
   const categories = [
     {
       id: 1,
-      name: "kankaat",
+      name: "Fabrics",
       subcategory: [
-        { id: 1, name: "trikoot" },
-        { id: 2, name: "colleget" },
+        { id: 1, name: "Stretch" },
+        { id: 2, name: "College" },
       ],
     },
     {
       id: 2,
-      name: "langat",
+      name: "Yarns",
       subcategory: [
-        { id: 3, name: "villalangat" },
-        { id: 4, name: "puuvillalangat" },
+        { id: 3, name: "Wool" },
+        { id: 4, name: "Cotton" },
       ],
     },
     {
       id: 3,
-      name: "nyplaystarvikkeet",
+      name: "Bobbin lace",
       subcategory: [
-        { id: 5, name: "nyplaystyynyt" },
-        { id: 6, name: "nypylat" },
+        { id: 5, name: "Bobbin pillows" },
+        { id: 6, name: "Bobbins" },
       ],
     },
     {
       id: 4,
-      name: "askartelu",
+      name: "Hobby crafts",
       subcategory: [
-        { id: 7, name: "kortit" },
-        { id: 8, name: "koristeet" },
+        { id: 7, name: "Card supplies" },
+        { id: 8, name: "Decorations" },
       ],
     },
   ];

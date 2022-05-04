@@ -24,18 +24,21 @@ const Router = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/listings" element={<AddListing />} />
-      <Route path="/categories/kankaat" element={<Fabric />} />
-      <Route path="/categories/langat" element={<Yarn />} />
-      <Route path="/categories/nyplaystarvikkeet" element={<BobbinLace />} />
-      <Route path="/categories/askartelu" element={<HobbyCraft />} />
-      <Route path="/subcategories/trikoot" element={<Stretch />} />
-      <Route path="/subcategories/colleget" element={<College />} />
-      <Route path="/subcategories/villalangat" element={<Wool />} />
-      <Route path="/subcategories/puuvillalangat" element={<Cotton />} />
-      <Route path="/subcategories/nyplaystyynyt" element={<BobbinPillow />} />
-      <Route path="/subcategories/nypylat" element={<Bobbin />} />
-      <Route path="/subcategories/kortit" element={<CardSupplies />} />
-      <Route path="/subcategories/koristeet" element={<Decor />} />
+      <Route path="/categories/fabrics" element={<Fabric />} />
+      <Route path="/categories/yarns" element={<Yarn />} />
+      <Route path="/categories/bobbin%20lace" element={<BobbinLace />} />
+      <Route path="/categories/hobby%20crafts" element={<HobbyCraft />} />
+      <Route path="/subcategories/stretch" element={<Stretch />} />
+      <Route path="/subcategories/college" element={<College />} />
+      <Route path="/subcategories/wool" element={<Wool />} />
+      <Route path="/subcategories/cotton" element={<Cotton />} />
+      <Route
+        path="/subcategories/bobbin%20pillows"
+        element={<BobbinPillow />}
+      />
+      <Route path="/subcategories/bobbins" element={<Bobbin />} />
+      <Route path="/subcategories/card%20supplies" element={<CardSupplies />} />
+      <Route path="/subcategories/decorations" element={<Decor />} />
       <Route path="/listings/:id" element={<Listing />} />
     </Routes>
   );
