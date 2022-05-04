@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
+import "./Components.css";
+import Button from "./UI_components/Button";
 
 const Navbar = () => {
-  const padding = {
-    padding: 5,
-  };
-
   return (
-    <div>
-      <Link style={padding} to="/">
-        Home
+    <div className="navbar">
+      <Link to={`/`}>
+        <Button className="navbar__btn" text="Home"></Button>
       </Link>
-      <Link style={padding} to="/register">
-        Register
+
+      <Link to={`/register`}>
+        <Button className="navbar__btn" text="Register"></Button>
       </Link>
-      <Link style={padding} to="/login">
-        Login
+
+      <Link to={`/login`}>
+        <Button className="navbar__btn" text="Login"></Button>
       </Link>
     </div>
   );
