@@ -9,6 +9,10 @@ const Navbar = () => {
         <Button className="navbar__btn" text="Home"></Button>
       </Link>
 
+      <Link to={`/listings`}>
+        <Button className="navbar__btn" text="New listing"></Button>
+      </Link>
+
       <Link to={`/register`}>
         <Button className="navbar__btn" text="Register"></Button>
       </Link>

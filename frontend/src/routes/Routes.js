@@ -15,6 +15,7 @@ import Bobbin from "../components/Bobbin";
 import CardSupplies from "../components/CardSupplies";
 import Decor from "../components/Decor";
 import Listing from "../components/Listing";
+import AddListing from "../components/AddListing";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/listings" element={<AddListing />} />
       <Route path="/categories/kankaat" element={<Fabric />} />
       <Route path="/categories/langat" element={<Yarn />} />
       <Route path="/categories/nyplaystarvikkeet" element={<BobbinLace />} />
