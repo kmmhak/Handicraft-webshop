@@ -101,3 +101,31 @@ body {
   background: white;
   color: #800080;
 }
+
+.listing__form {
+  padding: 1rem;
+}
+
+.formInput {
+  padding: 5px;
+}
+
+.listing__btn {
+  padding: 10px;
+  background-color: #800080;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #800080;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.listing__btn:hover {
+  background: white;
+  color: #800080;
+  border: 2px solid #800080;
+}
+
+.listing__header {
+  padding: 5px;
+}
