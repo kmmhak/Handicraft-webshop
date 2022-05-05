@@ -15,12 +15,7 @@ export const getNewest = async (req, res) => {
       `SELECT 
       listings.id, 
       title, 
-      brand, 
       img, 
-      length, 
-      unit, 
-      color, 
-      description, 
       price, 
       categories.name AS category, 
       subcategories.name AS subcategory, 
@@ -43,9 +38,28 @@ export const getNewest = async (req, res) => {
 export const getById = async (req, res) => {
   try {
     const id = Number(req.params.id);
-    const listings = await pool.query("SELECT * FROM listings WHERE id=$1", [
-      id,
-    ]);
+    const listings = await pool.query(
+      `SELECT 
+      listings.id, 
+      title, 
+      brand, 
+      img, 
+      length, 
+      unit, 
+      color, 
+      description, 
+      price, 
+      categories.name AS category, 
+      subcategories.name AS subcategory, 
+      users.username, 
+      added 
+      FROM listings 
+      LEFT JOIN categories ON listings.fk_categories_id=categories.id
+      LEFT JOIN subcategories ON listings.fk_subcategories_id=subcategories.id
+      LEFT JOIN users ON listings.fk_users_id=users.id
+	    WHERE listings.id = $1`,
+      [id]
+    );
 
     if (listings.rows.length > 0) {
       res.status(200).json({ listings: listings.rows });
