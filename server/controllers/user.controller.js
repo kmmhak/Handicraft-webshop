@@ -112,28 +112,25 @@ export const deleteUser = async (req, res) => {
 
 export const register = async (req, res) => {
   try {
-    const { username, email, password, password2 } = req.body;
+    const { username, email, password } = req.body;
     const errorList = [];
 
-    const user = await pool.query("SELECT * FROM users WHERE email=$1", [
+    const foundEmail = await pool.query("SELECT * FROM users WHERE email=$1", [
       email,
     ]);
 
-    if (user.rows.length > 0) {
+    const foundUsername = await pool.query(
+      "SELECT * FROM users WHERE username=$1",
+      [username]
+    );
+    if (foundEmail.rows.length > 0) {
       errorList.push("Email already in use");
     }
 
-    if (!validateEmail(email)) {
-      errorList.push("Invalid email");
+    if (foundUsername.rows.length > 0) {
+      errorList.push("Username already in use");
     }
 
-    if (password !== password2) {
-      errorList.push("Passwords do not match");
-    }
-
-    if (password.length < 6) {
-      errorList.push("Password must be atleast 6 characters long");
-    }
     if (errorList.length > 0) {
       res.status(400).json({ errorList });
     } else {
