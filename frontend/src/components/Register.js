@@ -2,8 +2,11 @@ import "./register.css";
 import { useState } from "react";
 import FormInput2 from "./FormInput2";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -66,6 +69,7 @@ const Register = () => {
       })
       .then(function (response) {
         console.log(response);
+        navigate("/login");
       })
       .catch(function (error) {
         console.log(error.response.data.errorList);
