@@ -1,6 +1,6 @@
 import "./register.css";
 import { useState } from "react";
-import FormInput2 from "./FormInput2";
+import FormInput from "./FormInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -85,7 +85,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <h1>Register a new user</h1>
         {inputs.map((input) => (
-          <FormInput2
+          <FormInput
             key={input.id}
             {...input}
             value={values[input.name]}
