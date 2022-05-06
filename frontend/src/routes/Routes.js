@@ -16,6 +16,7 @@ import CardSupplies from "../components/CardSupplies";
 import Decor from "../components/Decor";
 import Listing from "../components/Listing";
 import AddListing from "../components/AddListing";
+import UserPage from "../components/UserPage";
 
 const Router = () => {
   return (
@@ -40,6 +41,7 @@ const Router = () => {
       <Route path="/subcategories/card%20supplies" element={<CardSupplies />} />
       <Route path="/subcategories/decorations" element={<Decor />} />
       <Route path="/listings/:id" element={<Listing />} />
+      <Route path="/users/:id" element={<UserPage />} />
     </Routes>
   );
 };

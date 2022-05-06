@@ -3,6 +3,7 @@ import { useState } from "react";
 import FormInput from "./FormInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Button from "./UI_components/Button";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -92,8 +93,7 @@ const Register = () => {
             onChange={onChange}
           />
         ))}
-
-        <button className="register__btn">Submit</button>
+        <Button className="register__btn" text="Submit" />
       </form>
     </div>
   );
