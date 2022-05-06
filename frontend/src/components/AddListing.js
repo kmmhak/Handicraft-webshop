@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FormInput from "./FormInput";
+import Button from "./UI_components/Button";
 
 const AddListing = () => {
   const [values, setValues] = useState({
@@ -109,7 +110,7 @@ const AddListing = () => {
               onChange={onChange}
             />
           ))}
-          <button className="listing__btn">Create listing</button>
+          <Button className="listing__btn" text="Create listing" />
         </form>
       </div>
     </div>
