@@ -1,5 +1,6 @@
 import Subcategory from "./Subcategory";
 import Category from "./Category";
+import "./Components.css";
 
 const Sidebar = () => {
   const categories = [
@@ -39,15 +40,17 @@ const Sidebar = () => {
 
   return (
     <div>
-      <h2>Categories</h2>
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <Category category={category} />
-            <Subcategory category={category.subcategory} />
-          </li>
-        ))}
-      </ul>
+      <div className="sidebar">
+        <h2 className="sidebar__title">Categories</h2>
+        <ul>
+          {categories.map((category) => (
+            <li key={category.id}>
+              <Category category={category} />
+              <Subcategory category={category.subcategory} />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
