@@ -10,7 +10,7 @@ const userRouter = Router();
 passport.use(jwtStrategy);
 
 userRouter.get("/", passportJwt(), controller.getAll);
-userRouter.get("/:id", passportJwt(), controller.getById);
+userRouter.get("/:id", controller.getById);
 userRouter.patch("/change", passportJwt(), controller.changePassword);
 userRouter.patch("/", passportJwt(), controller.updateInfo);
 userRouter.delete("/:id", passportJwt(), controller.deleteUser);

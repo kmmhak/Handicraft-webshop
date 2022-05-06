@@ -3,8 +3,6 @@ import axios from "axios";
 import "./Components.css";
 import { useEffect, useState } from "react";
 
-const username = "Minnie";
-
 const Home = () => {
   const [listings, setListings] = useState([]);
 
@@ -19,7 +17,7 @@ const Home = () => {
   if (listings.length !== 0) {
     return (
       <div>
-        <h1>Welcome to your home page, {username}!</h1>
+        <h1>Welcome to Kiku's handicraft webshop!</h1>
 
         <div className="newest">
           <div className="newest__title">
