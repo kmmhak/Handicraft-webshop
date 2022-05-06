@@ -1,5 +1,11 @@
+import "./Components.css";
+
 const Footer = () => {
-  return <p>© Kiku 2022</p>;
+  return (
+    <div className="footer">
+      <p>© Kiku 2022</p>
+    </div>
+  );
 };
 
 export default Footer;
