@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import "./Components.css";
 import Button from "./UI_components/Button";
+import { useUser } from "../contexts/UserContext";
 
 const Navbar = () => {
+  const { loggedIn, currentUser } = useUser();
+  console.log(loggedIn);
+
   return (
     <div className="navbar">
       <Link to={`/`}>
@@ -12,14 +16,19 @@ const Navbar = () => {
       <Link to={`/listings`}>
         <Button className="navbar__btn" text="New listing"></Button>
       </Link>
+      {loggedIn ? (
+        currentUser[0].username
+      ) : (
+        <>
+          <Link to={`/register`}>
+            <Button className="navbar__btn" text="Register"></Button>
+          </Link>
 
-      <Link to={`/register`}>
-        <Button className="navbar__btn" text="Register"></Button>
-      </Link>
-
-      <Link to={`/login`}>
-        <Button className="navbar__btn" text="Login"></Button>
-      </Link>
+          <Link to={`/login`}>
+            <Button className="navbar__btn" text="Login"></Button>
+          </Link>
+        </>
+      )}
     </div>
   );
 };
