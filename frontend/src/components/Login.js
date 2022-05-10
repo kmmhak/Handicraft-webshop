@@ -4,9 +4,11 @@ import axios from "axios";
 import Button from "./UI_components/Button";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useUser();
 
   const [values, setValues] = useState({
     email: "",
@@ -41,7 +43,9 @@ const Login = () => {
         password: values.password,
       })
       .then(function (response) {
-        console.log(response);
+        const { token, user } = response.data;
+        console.log(token, user);
+        login(user, token);
         navigate(`/users/${response.data.user[0].id}`);
       })
       .catch(function (error) {
