@@ -2,9 +2,13 @@ import React from "react";
 import { useUser } from "../contexts/UserContext";
 
 const UserPage = () => {
-  const { currentUser } = useUser();
+  const { currentUser, loggedIn } = useUser();
 
-  return <h1>Welcome to your homepage {currentUser[0].username}!</h1>;
+  return (
+    <h1>
+      Welcome to your homepage {loggedIn ? currentUser[0].username : null}!
+    </h1>
+  );
 };
 
 export default UserPage;
